@@ -43,7 +43,7 @@ jobs:
         with:
           repo_token: "${{ secrets.MY_TOKEN }}"
           prerelease: false
-          automatic_release_tag: "${{ github.sha }}"  # Using commit SHA as the tag
+          automatic_release_tag: "1"
           files: |
             dist/*
             synthetic_real_estate_data.csv
