@@ -45,3 +45,4 @@ jobs:
           files: |
             dist/*
             synthetic_real_estate_data.csv
+            
