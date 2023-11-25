@@ -38,20 +38,10 @@ jobs:
     steps:
       - name: Create Release
         id: create_release
-        uses: ncipollo/release-action@v1.13.0
+      - uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          artifacts: "dist/*,synthetic_real_estate_data.csv"
-          bodyFile: "body.md"
-
-      - name: Upload Executable
-        uses: actions/upload-artifact@v2
-        with:
-          name: test
-          path: ./dist/test
-
-      - name: Upload Data File
-        uses: actions/upload-artifact@v2
-        with:
-          name: synthetic_real_estate_data.csv
-          path: ./synthetic_real_estate_data.csv
-
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            dist/*
+            synthetic_real_estate_data.csv
