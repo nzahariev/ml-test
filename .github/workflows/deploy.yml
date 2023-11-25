@@ -20,11 +20,12 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          sudo apt update
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller
-          sudo apt install wine -y
+          sudo dpkg --add-architecture i386
+          sudo apt update
+          sudo apt-get install wine32
 
       - name: Build Executable
         run: |
