@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -34,18 +36,22 @@ jobs:
     needs: build
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Set up Git
-        run: git config --global user.email "you@example.com" && git config --global user.name "Your Name"
-
-      - name: Create Tag
-        run: git tag -a v1.0 -m "Version 1.0" && git push origin v1.0
-
       - name: Create Release
         id: create_release
         uses: ncipollo/release-action@v1.13.0
         with:
           artifacts: "dist/*,synthetic_real_estate_data.csv"
           bodyFile: "body.md"
+
+      - name: Upload Executable
+        uses: actions/upload-artifact@v2
+        with:
+          name: test
+          path: ./dist/test
+
+      - name: Upload Data File
+        uses: actions/upload-artifact@v2
+        with:
+          name: synthetic_real_estate_data.csv
+          path: ./synthetic_real_estate_data.csv
+
