@@ -1,10 +1,10 @@
-
 name: Deploy
 
 on:
   push:
     branches:
       - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,10 +34,29 @@ jobs:
     needs: build
 
     steps:
-      - name: Deploy to Release
+      - name: Create Release
+        id: create_release
         uses: actions/create-release@v1
         with:
-          files: |
-            ./dist/*
-            ./synthetic_real_estate_data.csv
-          token: ${{ secrets.MY_TOKEN }}
+          tag_name: ${{ github.sha }}
+          release_name: Release ${{ github.sha }}
+          body: |
+            Release notes for ${{ github.sha }}
+
+      - name: Upload Executable
+        id: upload_executable
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./dist/test
+          asset_name: test
+          asset_content_type: application/octet-stream
+
+      - name: Upload Data File
+        id: upload_data_file
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./synthetic_real_estate_data.csv
+          asset_name: synthetic_real_estate_data.csv
+          asset_content_type: text/csv
