@@ -44,7 +44,6 @@ jobs:
             Release notes for ${{ github.sha }}
           draft: false
           prerelease: false
-          token: ${{ secrets.MY_TOKEN }}
 
       - name: Upload Executable
         id: upload_executable
