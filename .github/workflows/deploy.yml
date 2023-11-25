@@ -23,13 +23,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller
-          sudo dpkg --add-architecture i386
-          sudo apt update
-          sudo apt-get install wine32
 
       - name: Build Executable
         run: |
-          sudo wine pyinstaller --name test.exe --onefile --specpath . main.py data_preparation.py evaluate_model.py generate_synthetic_data.py train_model.py
+          pyinstaller --name main.exe --onefile --specpath . --platform win32 main.py data_preparation.py evaluate_model.py generate_synthetic_data.py train_model.py
 
 
       - name: Check Contents
@@ -44,7 +41,7 @@ jobs:
         with:
           repo_token: "${{ secrets.MY_TOKEN }}"
           prerelease: false
-          automatic_release_tag: "1"
+          automatic_release_tag: "ubuntu_executable"
           files: |
             dist/*
             synthetic_real_estate_data.csv
