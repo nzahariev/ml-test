@@ -41,9 +41,9 @@ jobs:
       - name: Automatic Releases
         uses: marvinpinto/action-automatic-releases@latest
         with:
-          repo_token: "${{ secrets.MY_TOKEN }}"
-          automatic_release_tag: "${{ github.ref }}"
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
           prerelease: false
+          automatic_release_tag: "${{ github.sha }}"  # Using commit SHA as the tag
           files: |
             dist/*
             synthetic_real_estate_data.csv
