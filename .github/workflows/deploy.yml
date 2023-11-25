@@ -26,7 +26,7 @@ jobs:
 
       - name: Build Executable
         run: |
-          pyinstaller --name YourExecutableName --onefile --specpath build_directory main.py data_preparation.py evaluate_model.py generate_synthetic_data.py train_model.py
+          pyinstaller --name test --onefile --specpath . main.py data_preparation.py evaluate_model.py generate_synthetic_data.py train_model.py
 
   deploy:
     runs-on: ubuntu-latest
