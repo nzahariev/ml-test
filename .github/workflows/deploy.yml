@@ -36,31 +36,19 @@ jobs:
     steps:
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ncipollo/release-action@v1.13.0
         with:
-          tag_name: ${{ github.sha }}
-          release_name: Release ${{ github.sha }}
-          body: |
-            Release notes for ${{ github.sha }}
-          draft: false
-          prerelease: false
+          artifacts: "dist/*,synthetic_real_estate_data.csv"
+          bodyFile: "body.md"
 
       - name: Upload Executable
-        id: upload_executable
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-artifact@v2
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/test
-          asset_name: test
-          asset_content_type: application/octet-stream
+          name: test
+          path: ./dist/test
 
       - name: Upload Data File
-        id: upload_data_file
-        uses: actions/upload-release-asset@v1
+        uses: actions/upload-artifact@v2
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./synthetic_real_estate_data.csv
-          asset_name: synthetic_real_estate_data.csv
-          asset_content_type: text/csv
+          name: synthetic_real_estate_data.csv
+          path: ./synthetic_real_estate_data.csv
