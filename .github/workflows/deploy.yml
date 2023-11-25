@@ -20,15 +20,15 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          apt update
+          sudo apt update
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pyinstaller
-          apt install wine -y
+          sudo apt install wine -y
 
       - name: Build Executable
         run: |
-          wine pyinstaller --name test.exe --onefile --specpath . main.py data_preparation.py evaluate_model.py generate_synthetic_data.py train_model.py
+          sudo wine pyinstaller --name test.exe --onefile --specpath . main.py data_preparation.py evaluate_model.py generate_synthetic_data.py train_model.py
 
 
       - name: Check Contents
