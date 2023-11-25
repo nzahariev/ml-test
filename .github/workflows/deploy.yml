@@ -26,7 +26,8 @@ jobs:
 
       - name: Build Executable
         run: |
-          pyinstaller --name test.exe --onefile --specpath . main.py data_preparation.py evaluate_model.py generate_synthetic_data.py train_model.py
+          pyinstaller --name test.exe --onefile --specpath . --platform win64 main.py data_preparation.py evaluate_model.py generate_synthetic_data.py train_model.py
+
 
       - name: Check Contents
         run: ls -R
