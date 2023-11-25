@@ -46,4 +46,6 @@ jobs:
             dist/*
             synthetic_real_estate_data.csv
 
-        run: echo done
+      - name: "Echo"
+        run: |
+          echo "done""
