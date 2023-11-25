@@ -38,6 +38,7 @@ jobs:
     steps:
       - name: Create Release
         id: create_release
+        run: echo "Create Release step"
 
       - name: Automatic Releases
         uses: marvinpinto/action-automatic-releases@latest
